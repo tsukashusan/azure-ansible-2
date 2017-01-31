@@ -1,0 +1,6 @@
+- name: download cloudera repo file
+  get_url:
+    url: http://archive.cloudera.com/cdh5/redhat/7/x86_64/cdh/cloudera-cdh5.repo
+    dest: /etc/yum.repos.d/cloudera-cdh5.repo
+  become: yes
+  become_user: root

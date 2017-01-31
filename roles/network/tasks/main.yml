@@ -1,0 +1,24 @@
+- name: Create virtual network
+  azure_rm_virtualnetwork:
+    resource_group: "{{ resource_group }}"
+    name: "{{ vm_net_name }}"
+    address_prefixes: "{{ network_addr_prefix }}"
+
+- name: Add subnet
+  azure_rm_subnet:
+    resource_group: "{{ resource_group }}"
+    name: "{{ subnet_name }}"
+    address_prefix: "{{ network_subnet_addr_prefix }}"
+    virtual_network: "{{ vm_net_name }}"
+
+- name: Create security group that allows SSH
+  azure_rm_securitygroup:
+    resource_group: "{{ resource_group }}"
+    name: "{{ security_group_name }}"
+    rules:
+      - name: SSH
+        protocol: Tcp
+        destination_port_range: 22
+        access: Allow
+        priority: 101
+        direction: Inbound

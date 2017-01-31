@@ -1,0 +1,18 @@
+- name: get-pip.py download
+  get_url:
+    url: https://bootstrap.pypa.io/get-pip.py
+    dest: /tmp/get-pip.py
+    mode: 0777
+
+- name: pip install 
+  command: /tmp/get-pip.py
+
+- name: remove get-pip.py
+  file:
+    path: /tmp/get-pip.py
+    state: absent
+  
+- name: pip package install
+  pip:
+    name: "{{ item }}"
+  with_items: "{{ pip_packages }}"

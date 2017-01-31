@@ -1,0 +1,11 @@
+- name: install specific packages for node
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ node_yum_packages }}"
+ 
+- name: npm package install
+  npm:
+    name: "{{ item }}"
+    global: yes
+  with_items: "{{ npm_packages }}"

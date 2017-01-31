@@ -1,0 +1,7 @@
+devtool_packages:
+  - gcc
+  - deltarpm
+  - python-devel
+  - openssl-devel
+  - epel-release
+  - unzip

@@ -1,0 +1,5 @@
+- name: install specific packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ devtool_packages }}"

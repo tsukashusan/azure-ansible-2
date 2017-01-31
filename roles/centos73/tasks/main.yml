@@ -1,0 +1,45 @@
+- name: Create VM with CentOS
+  azure_rm_virtualmachine:
+    resource_group: "{{ resource_group }}"
+    name: "{{ vm_name }}{{ no }}"
+    virtual_network_name: "{{ vm_network_name }}"
+    subnet_name: subnet001
+    network_interface_names: "{{ nic_name }}{{ no }}"
+    storage_container: centos73
+    storage_blob: "{{ vm_name }}{{ no }}.vhd"
+    vm_size: Standard_D1
+    storage_account_name: "{{ storage_account_name }}"
+    public_ip_allocation_method: Dynamic
+    admin_username: centos
+    ssh_password_enabled: False
+    ssh_public_keys:
+      - path: "/home/centos/.ssh/authorized_keys"
+        key_data: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCwTXfsS4+FRigKOYxWt9NYIQ2nSEA+dRu40d2+gkYEaZEuXpTL1VO+PNHzibC9v6zKwBD2bTyvCGb88/ybB6uKicUKlZhNKZs+tSvyrhgF+15Xh/3K1gS+ZAGszt3xUBHPynM4HcOU/anx32zO+lHCRUDPkbSeRlXzUsUJ0tC0aoye9kQsh96jF9Z2OrTPL42eLmLtK+uVNHwQvrhmuYrRAdlTM1we6Brf0AqeX8t1qNTMF9oURNSAFL5S21V+gYQlXIflUSEoFpHEWy/I9Drt6OREW6alxbuTHTw8LFk0E4yIWuOUXgYsnJt84W0EElyip7LJyzEtdg06NSeVhxSB ubuntu@JPSHTSUKAM001"
+    image:
+      offer: CentOS
+      publisher: OpenLogic
+      sku: '7.3'
+      version: latest
+  delegate_to: localhost
+
+- name: Get facts for one virtual network
+  register: network_fact
+  azure_rm_publicipaddress_facts:
+    resource_group: "{{ resource_group }}"
+    name: "{{ public_ip_name }}{{ no }}"
+
+- debug:
+    var: network_fact
+
+- debug:
+    msg: "{{ item.properties.ipAddress }}"
+  with_items: "{{azure_publicipaddresses}}"
+
+- name: Add new instance to host group
+  add_host:
+    hostname: "{{ vm_name }}{{ no }}"
+    groupname: "{{ host_group }}"
+    ansible_ssh_private_key_file: "/home/ubuntu/.ssh/beta"
+    ansible_ssh_host: "{{ item.properties.ipAddress }}"
+    ansible_ssh_user: centos
+  with_items: "{{ azure_publicipaddresses }}"

@@ -1,0 +1,21 @@
+---
+- name: create virtual machine
+  hosts: azure
+  connection: local
+  gather_facts: no
+  roles:
+    - network_assing
+    - centos73
+
+- name: configure virtual machine
+  hosts: "{{ host_group }}"
+  gather_facts: no
+  become: yes
+  roles:
+    - selinux_off
+    - hadoop-cdh
+    - hadoop-hotonworks
+    - devtool
+    - pip
+    - yum_update
+    - npm
