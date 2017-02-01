@@ -2,13 +2,6 @@
 - selinux:
     state: disabled
 
-#- name: restart machine
-#  shell: "/usr/bin/sleep 2 && /usr/sbin/reboot"
-#  async: 0
-#  poll: 0
-#  ignore_errors: true
-#  become: yes
-
 - name: restart machine
   command: "/usr/bin/systemd-run --on-active=2 /usr/bin/systemctl reboot"
   async: 5
