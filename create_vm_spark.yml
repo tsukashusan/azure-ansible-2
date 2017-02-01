@@ -20,3 +20,5 @@
     - yum_update
     - npm
     - jdk8
+    - spark
+    - sbt

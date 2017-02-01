@@ -1,5 +1,5 @@
 ---
-#jdk_get.yml
+#main.yml
 - name: jdk get 1.8.0_121
   get_url:
     url: http://download.oracle.com/otn-pub/java/jdk/8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/jdk-8u121-linux-x64.tar.gz
@@ -28,8 +28,22 @@
   file:
     path: /home/centos/jdk-8u121-linux-x64.tar.gz
     state: absent
-
 - name: remove jce_policy.zip
   file:
     path: /home/centos/jce_policy-8.zip
     state: absent
+
+- name: remove UnlimitedJCEPolicyJDK8
+  file:
+    path: /home/centos/UnlimitedJCEPolicyJDK8
+    state: absent
+
+- name: set JDK_PATH
+  lineinfile:
+    dest: /home/centos/.bash_profile
+    line: "{{ item }}"
+    state: present
+  with_items:
+      - 'export JAVA_HOME=/home/centos/jdk1.8.0_121'
+      - 'export JAVA_JRE=/home/centos/jdk1.8.0_121/jre'
+      - 'PATH=${JRE_HOME}/bin:${JAVA_HOME}/bin:${PATH}'

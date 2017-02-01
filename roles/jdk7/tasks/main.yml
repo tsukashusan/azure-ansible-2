@@ -1,0 +1,49 @@
+---
+#main.yml
+- name: jdk get 1.7.0_80
+  get_url:
+    url: http://download.oracle.com/otn/java/jdk/7u80-b15/jdk-7u80-linux-x64.tar.gz
+    headers: "Cookie:gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"
+    dest: /home/centos
+
+- name: get jce_policy-7
+  get_url:
+    url: http://download.oracle.com/otn-pub/java/jce/7/UnlimitedJCEPolicyJDK7.zip
+    headers: "Cookie:gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"
+    dest: /home/centos
+
+- name: jdk unarchive
+  command: /usr/bin/tar zxvf /home/centos/jdk-7u80-linux-x64.tar.gz -C /home/centos 
+
+- name: unarchive jce
+  command: /usr/bin/unzip /home/centos/UnlimitedJCEPolicyJDK7.zip -d /home/centos
+
+- name: jce copy(local_policy.jar)
+  command: /usr/bin/cp -f /home/centos/UnlimitedJCEPolicyJDK7/local_policy.jar /home/centos/jdk1.8.0_121/jre/lib/security/. 
+
+- name: jce copy(US_export_policy.jar)
+  command: /usr/bin/cp -f /home/centos/UnlimitedJCEPolicyJDK7/US_export_policy.jar /home/centos/jdk1.8.0_121/jre/lib/security/. 
+
+- name: remove jdk archive
+  file:
+    path: /home/centos/jdk-7u80-linux-x64.tar.gz
+    state: absent
+- name: remove jce_policy.zip
+  file:
+    path: /home/centos/UnlimitedJCEPolicyJDK7.zip
+    state: absent
+
+- name: remove UnlimitedJCEPolicyJDK7
+  file:
+    path: /home/centos/UnlimitedJCEPolicyJDK7
+    state: absent
+
+- name: set JDK_PATH
+  lineinfile:
+    dest: /home/centos/.bash_profile
+    line: "{{ item }}"
+    state: present
+  with_items:
+      - 'export JAVA_HOME=/home/centos/jdk1.7.0_80'
+      - 'export JAVA_JRE=/home/centos/jdk1.7.0_80/jre'
+      - 'PATH=${JRE_HOME}/bin:${JAVA_HOME}/bin:${PATH}'

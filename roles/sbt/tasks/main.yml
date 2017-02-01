@@ -1,0 +1,22 @@
+---
+#main.yml
+- name: download sbt
+  get_url:
+    url: https://dl.bintray.com/sbt/native-packages/sbt/0.13.13/sbt-0.13.13.zip
+    dest: /home/centos
+
+- name: unarchive jce
+  command: /usr/bin/unzip /home/centos/sbt-0.13.13.zip -d /home/centos
+
+- name: remove sbt
+  file:
+    path: /home/centos/sbt-0.13.13.zip
+    state: absent
+
+- name: set sbt path
+  lineinfile:
+    dest: /home/centos/.bash_profile
+    line: "{{ item }}"
+    state: present
+  with_items:
+      - 'export PATH=/home/centos/sbt-launcher-packaging-0.13.13/bin:${PATH}'
