@@ -1,0 +1,6 @@
+---
+#main.yml
+- name: set time zone
+  command: /usr/bin/timedatectl set-timezone Asia/Tokyo
+- name: set locale
+  command: /usr/bin/localectl set-locale LANG=ja_JP.utf8

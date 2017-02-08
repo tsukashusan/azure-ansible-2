@@ -12,6 +12,7 @@
   gather_facts: no
   become: yes
   roles:
+    - locale_time
     - selinux_off
     - hadoop-cdh
     - hadoop-hotonworks
