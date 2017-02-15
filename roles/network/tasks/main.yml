@@ -1,3 +1,12 @@
+- name: Resource Group fact
+  azure_rm_resourcegroup_facts:
+
+- name: Create virtual network
+  azure_rm_virtualnetwork:
+    resource_group: "{{ resource_group }}"
+    name: "{{ vm_net_name }}"
+    address_prefixes: "{{ network_addr_prefix }}"
+
 - name: Create virtual network
   azure_rm_virtualnetwork:
     resource_group: "{{ resource_group }}"
