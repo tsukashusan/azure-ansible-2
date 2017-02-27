@@ -11,7 +11,7 @@
       - 5986
     storage_container: win2012r2
     storage_blob: "{{ vm_name }}{{ no }}.vhd"
-    vm_size: Standard_DS13_v2
+    vm_size: "{{ vm_size }}"
     storage_account_name: "{{ storage_account_name }}"
     public_ip_allocation_method: Dynamic
     admin_username: winadmin

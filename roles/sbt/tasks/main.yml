@@ -19,4 +19,5 @@
     line: "{{ item }}"
     state: present
   with_items:
-      - 'export PATH=/home/centos/sbt-launcher-packaging-0.13.13/bin:${PATH}'
+      - 'export SBT_HOME=/home/centos/sbt-launcher-packaging-0.13.13'
+      - 'export PATH=${SBT_HOME}/bin:${PATH}'

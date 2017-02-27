@@ -2,3 +2,29 @@
   yum:
     name: '*'
     state: latest
+
+- name: restart machine
+  command: "/usr/bin/systemd-run --on-active=5 /usr/bin/systemctl reboot"
+  async: 5
+  poll: 0
+  ignore_errors: true
+
+- name: wait for SSH port down
+  delegate_to: localhost
+  wait_for:
+    host: "{{ ansible_ssh_host }}"
+    delay: 0
+    state: stopped
+    port: 22
+    timeout: 300
+  become: no
+
+- name: wait for SSH port up
+  delegate_to: localhost
+  wait_for:
+    host: "{{ ansible_ssh_host }}"
+    state: started
+    delay: 10
+    timeout: 300
+    port: 22
+  become: no

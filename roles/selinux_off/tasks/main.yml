@@ -3,8 +3,8 @@
     state: disabled
 
 - name: restart machine
-  command: "/usr/bin/systemd-run --on-active=2 /usr/bin/systemctl reboot"
-  async: 5
+  command: "/usr/bin/systemd-run --on-active=5 /usr/bin/systemctl reboot"
+  async: 3
   poll: 0
   ignore_errors: true
   become: yes
