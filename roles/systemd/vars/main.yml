@@ -1,0 +1,5 @@
+systemd_packages:
+  - systemd
+  - systemd-libs
+  - systemd-python
+  - systemd-sysv

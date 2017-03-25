@@ -1,9 +1,9 @@
-- name: install specific packages for node
+- name: node npm install
   yum:
     name: "{{ item }}"
     state: latest
-  with_items: "{{ node_yum_packages }}"
- 
+  with_items: "{{ npm_yum_packages }}"
+
 - name: npm package install
   npm:
     name: "{{ item }}"

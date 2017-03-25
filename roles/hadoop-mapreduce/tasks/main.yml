@@ -1,0 +1,7 @@
+---
+#main.yml
+- name: install mapreduce packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ hadoop_mapreduce_packages }}"

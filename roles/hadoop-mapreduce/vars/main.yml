@@ -1,0 +1,3 @@
+hadoop_mapreduce_packages:
+  - hadoop-mapreduce
+  - hadoop-0.20-mapreduce

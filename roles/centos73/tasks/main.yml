@@ -43,3 +43,12 @@
     ansible_ssh_host: "{{ item.properties.ipAddress }}"
     ansible_ssh_user: centos
   with_items: "{{ azure_publicipaddresses }}"
+
+- name: wait for SSH port up
+  delegate_to: localhost
+  wait_for:
+    host: "{{ ansible_ssh_host }}"
+    state: started
+    delay: 10
+    timeout: 300
+    port: 22

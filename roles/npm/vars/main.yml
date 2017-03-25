@@ -1,6 +1,5 @@
-node_yum_packages:
+npm_yum_packages:
   - nodejs
   - npm
-
 npm_packages:
   - azure-cli

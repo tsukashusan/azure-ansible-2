@@ -1,0 +1,27 @@
+# Disable SELinux
+
+- name: restart machine
+  command: "/usr/bin/systemd-run --on-active=1 /usr/bin/systemctl reboot"
+  async: 0
+  poll: 0
+  ignore_errors: True
+
+- name: wait for SSH port down
+  delegate_to: localhost
+  wait_for:
+    host: "{{ ansible_ssh_host }}"
+    state: stopped
+    delay: 0
+    timeout: 600
+    port: 22
+  become: no
+
+- name: wait for SSH port up
+  delegate_to: localhost
+  wait_for:
+    host: "{{ ansible_ssh_host }}"
+    state: started
+    delay: 0
+    timeout: 300
+    port: 22
+  become: no

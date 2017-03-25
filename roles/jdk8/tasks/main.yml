@@ -1,27 +1,33 @@
 ---
 #main.yml
 - name: jdk get 1.8.0_121
+  become: no
   get_url:
     url: http://download.oracle.com/otn-pub/java/jdk/8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/jdk-8u121-linux-x64.tar.gz
     headers: "Cookie:gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"
     dest: /home/centos
 
 - name: get jce_policy-8
+  become: no
   get_url:
     url: http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
     headers: "Cookie:gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"
     dest: /home/centos
 
 - name: jdk unarchive
+  become: no
   command: /usr/bin/tar zxvf /home/centos/jdk-8u121-linux-x64.tar.gz -C /home/centos 
 
 - name: unarchive jce
+  become: no
   command: /usr/bin/unzip /home/centos/jce_policy-8.zip -d /home/centos
 
 - name: jce copy(local_policy.jar)
+  become: no
   command: /usr/bin/cp -f /home/centos/UnlimitedJCEPolicyJDK8/local_policy.jar /home/centos/jdk1.8.0_121/jre/lib/security/. 
 
 - name: jce copy(US_export_policy.jar)
+  become: no
   command: /usr/bin/cp -f /home/centos/UnlimitedJCEPolicyJDK8/US_export_policy.jar /home/centos/jdk1.8.0_121/jre/lib/security/. 
 
 - name: remove jdk archive
@@ -39,6 +45,7 @@
     state: absent
 
 - name: set JDK_PATH
+  become: no
   lineinfile:
     dest: /home/centos/.bash_profile
     line: "{{ item }}"

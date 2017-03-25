@@ -1,0 +1,5 @@
+- name: systemd upgrade
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ systemd_packages }}"

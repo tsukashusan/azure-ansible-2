@@ -1,7 +1,7 @@
 ---
-- name: create virtual network
+- name: create virtual machine
   hosts: azure
   connection: local
   gather_facts: no
   roles:
-    - network
+    - storage_account

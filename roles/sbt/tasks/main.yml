@@ -1,11 +1,13 @@
 ---
 #main.yml
 - name: download sbt
+  become: no
   get_url:
     url: https://dl.bintray.com/sbt/native-packages/sbt/0.13.13/sbt-0.13.13.zip
     dest: /home/centos
 
 - name: unarchive jce
+  become: no
   command: /usr/bin/unzip /home/centos/sbt-0.13.13.zip -d /home/centos
 
 - name: remove sbt
@@ -14,6 +16,7 @@
     state: absent
 
 - name: set sbt path
+  become: no
   lineinfile:
     dest: /home/centos/.bash_profile
     line: "{{ item }}"

@@ -5,3 +5,7 @@ devtool_packages:
   - openssl-devel
   - epel-release
   - unzip
+  - python-devel
+  - python-crypto
+  - libffi-devel
+  - openssl-devel

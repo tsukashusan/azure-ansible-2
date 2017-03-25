@@ -7,7 +7,7 @@
   azure_rm_networkinterface:
     resource_group: "{{ resource_group }}"
     name: "{{ nic_name }}{{ no }}"
-    virtual_network: "{{ vm_net_name }}"
+    virtual_network: "{{ vm_network_name }}"
     subnet: "{{ subnet_name }}"
     public_ip_name: "{{ public_ip_name }}{{ no }}"
     security_group: "{{ security_group_name }}"
