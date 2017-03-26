@@ -15,13 +15,8 @@
   roles:
     - locale_time
     - selinux_off
-    - hadoop-cdh
-    - hadoop-hotonworks
     - devtool
-    - pip
     - yum_update
     - jdk8
-    - spark
-    - sbt
     - npm
     - reboot

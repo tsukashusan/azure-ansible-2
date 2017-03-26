@@ -26,4 +26,5 @@
     - reboot
     - hadoop-mapreduce
     - npm
+    - maven
     - reboot

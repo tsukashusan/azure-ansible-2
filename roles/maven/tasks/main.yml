@@ -1,0 +1,31 @@
+---
+#main.yml
+- name: get maven
+  get_url:
+    url: http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip
+    dest: /opt
+
+- name: unarchive maven
+  command: /usr/bin/unzip /opt/apache-maven-3.3.9-bin.zip -d /opt
+
+- name: chwon maven
+  file:
+    owner: root
+    group: root
+    path: /opt/apache-maven-3.3.9
+    state: directory
+    recurse: yes
+
+- name: remove maven archive
+  file:
+    path: /opt/apache-maven-3.3.9-bin.zip
+    state: absent
+
+- name: set MAVEN_PATH
+  become: no
+  lineinfile:
+    dest: /home/centos/.bash_profile
+    line: "{{ item }}"
+    state: present
+  with_items:
+      - 'PATH=/opt/apache-maven-3.3.9/bin:${PATH}'

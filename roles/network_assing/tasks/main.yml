@@ -1,8 +1,18 @@
-- name: Create public ip
+- name: Create public ip registered DNS
   azure_rm_publicipaddress:
     resource_group: "{{ resource_group }}"
     allocation_method: Dynamic
     name: "{{ public_ip_name }}{{ no }}"
+    domain_name_label: "{{ domain_name_label }}"
+  when: domain_name_label is defined
+
+- name: Create public ip non-registered DNS
+  azure_rm_publicipaddress:
+    resource_group: "{{ resource_group }}"
+    allocation_method: Dynamic
+    name: "{{ public_ip_name }}{{ no }}"
+  when: domain_name_label is undefined
+
 - name: Create NIC
   azure_rm_networkinterface:
     resource_group: "{{ resource_group }}"

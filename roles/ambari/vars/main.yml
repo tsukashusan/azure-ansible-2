@@ -1,0 +1,2 @@
+ambari_packages:
+  - ambari-server

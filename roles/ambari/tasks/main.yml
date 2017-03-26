@@ -1,0 +1,5 @@
+- name: install ambari
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ ambari_packages }}"

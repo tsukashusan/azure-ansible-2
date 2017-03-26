@@ -1,0 +1,46 @@
+- name: install mariadb
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ mariadb_packages }}"
+
+- name: unarchive jdbc mysql
+  unarchive:
+    src: files/mysql-connector-java-6.0.6.zip
+    dest: /tmp
+
+- name: jdbc jar location config file directory
+  file:
+    path: /usr/share/java
+    state: directory
+    owner: root
+    group: root
+    mode: "u=rwx,g=rx,o=rx"
+
+- name: jdbc jar location config file directory
+  copy:
+    src: /tmp/mysql-connector-java-6.0.6/mysql-connector-java-6.0.6-bin.jar
+    dest: /usr/share/java
+    owner: root
+    group: root
+    mode: "u=rw,g=r,o=r"
+    remote_src: True
+
+- name: jdbc jar location config file directory
+  file:
+    src: /usr/share/java/mysql-connector-java-6.0.6-bin.jar
+    dest: /usr/share/java/mysql-connector-java.jar
+    owner: root
+    group: root
+    state: link
+
+- name: remove tmporary jdbc
+  file:
+    path: /tmp/mysql-connector-java-6.0.6
+    state: absent
+
+- name: enable service mariadb
+  systemd:
+    name: mariadb
+    enabled: yes
+    state: started

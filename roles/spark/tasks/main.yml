@@ -1,18 +1,26 @@
 ---
 #main.yml
 - name: download spark
-  become: no
   get_url:
     url: http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.7.tgz
-    dest: /home/centos
+    dest: /opt
 
 - name: unarchive spark
-  become: no
-  command: /usr/bin/tar zxvf /home/centos/spark-2.1.0-bin-hadoop2.7.tgz -C /home/centos
+  become: yes
+  become_user: root
+  command: /usr/bin/tar zxvf /opt/spark-2.1.0-bin-hadoop2.7.tgz -C /opt
+
+- name: chwon spark
+  file:
+    owner: root
+    group: root
+    path: /opt/spark-2.1.0-bin-hadoop2.7
+    state: directory
+    recurse: yes
 
 - name: remove spark
   file:
-    path: /home/centos/spark-2.1.0-bin-hadoop2.7.tgz
+    path: /opt/spark-2.1.0-bin-hadoop2.7.tgz
     state: absent
 
 - name: set spark path
@@ -22,5 +30,5 @@
     line: "{{ item }}" 
     state: present
   with_items:
-      - 'export SPARK_HOME=/home/centos/spark-2.1.0-bin-hadoop2.7'
+      - 'export SPARK_HOME=/opt/spark-2.1.0-bin-hadoop2.7'
       - 'PATH=${SPARK_HOME}/bin:${PATH}'
