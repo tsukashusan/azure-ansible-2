@@ -2,5 +2,6 @@
   get_url:
     url: http://archive.cloudera.com/cdh5/redhat/7/x86_64/cdh/cloudera-cdh5.repo
     dest: /etc/yum.repos.d/cloudera-cdh5.repo
+    sha256sum: "f088145351baed9798f2b0c425521a2232d6594d9148d0acaf27caf12d0822d9"
   become: yes
   become_user: root

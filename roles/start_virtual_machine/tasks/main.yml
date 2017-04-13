@@ -1,0 +1,6 @@
+- name: Power On for one machine
+  azure_rm_virtualmachine:
+    resource_group: "{{ resource_group }}"
+    name: "{{ vm_name }}"
+    vm_size: "{{ vm_size }}"
+  when: vm_name is defined

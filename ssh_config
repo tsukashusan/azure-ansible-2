@@ -1,5 +1,6 @@
 Host *
   ControlMaster auto
-  ControlPersist 1h
+  ControlPersist 300
   StrictHostKeyChecking no 
   UserKnownHostsFile /dev/null
+  ConnectTimeout 60

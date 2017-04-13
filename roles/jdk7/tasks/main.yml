@@ -5,12 +5,14 @@
     url: http://download.oracle.com/otn/java/jdk/7u80-b15/jdk-7u80-linux-x64.tar.gz
     headers: "Cookie:gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"
     dest: /opt
+    sha256sum: "24d885d535739a6b7b54e153919fbbce932a344f5ca3ee5a86b01ac775085863"
 
 - name: get jce_policy-7
   get_url:
     url: http://download.oracle.com/otn-pub/java/jce/7/UnlimitedJCEPolicyJDK7.zip
     headers: "Cookie:gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"
     dest: /opt
+    sha256sum: "7a8d790e7bd9c2f82a83baddfae765797a4a56ea603c9150c87b7cdb7800194d"
 
 - name: unarchive jdk
   command: /usr/bin/tar zxvf /opt/jdk-7u80-linux-x64.tar.gz -C /opt 

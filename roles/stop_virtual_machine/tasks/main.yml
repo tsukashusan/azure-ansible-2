@@ -1,0 +1,7 @@
+- name: Power Off for one machine
+  azure_rm_virtualmachine:
+    resource_group: "{{ resource_group }}"
+    name: "{{ vm_name }}"
+    started: False
+    vm_size: "{{ vm_size }}"
+    allocated: "{{ allocated }}"

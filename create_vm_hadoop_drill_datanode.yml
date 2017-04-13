@@ -1,0 +1,23 @@
+---
+- name: create virtual machine
+  hosts: azure
+  connection: local
+  gather_facts: no
+  roles:
+    - network_assing
+    - storage_account
+    - centos73
+
+- name: configure virtual machine
+  hosts: "{{ host_group }}"
+  gather_facts: no
+  become: yes
+  roles:
+    - locale_time
+    - selinux_off
+    - devtool
+    - yum_update
+    - jdk8
+    - npm
+    - apache-drill
+    - reboot

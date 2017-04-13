@@ -1,13 +1,15 @@
 - name: download hotonworks ambari file
   get_url:
-    url: http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.4.2.0/ambari.repo
+    url: http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.5.0.3/ambari.repo
     dest: /etc/yum.repos.d/ambari.repo
+    sha256sum: "07f2ff7072e2d5ac84abe9a1b6ddcc184660c8add906438b90189409b203d4c1"
   become: yes
   become_user: root
 
 - name: download hotonworks hdp file
   get_url:
-    url: http://public-repo-1.hortonworks.com/HDP/centos7/2.x/updates/2.5.3.0/hdp.repo
+    url: http://public-repo-1.hortonworks.com/HDP/centos7/2.x/updates/2.6.0.3/hdp.repo
     dest: /etc/yum.repos.d/hdp.repo
+    sha256sum: "dcc727e97598342357f0bbaafffed8ad784a5941a4375cba545cb3e7bea785ba"
   become: yes
   become_user: root

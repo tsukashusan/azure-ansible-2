@@ -1,0 +1,34 @@
+---
+#main.yml
+- name: download apache-drill
+  get_url:
+    url: http://ftp.jaist.ac.jp/pub/apache/drill/drill-1.10.0/apache-drill-1.10.0.tar.gz
+    dest: /opt
+    sha256sum: "92286f941cd0264eba57789d75759e7b598bf7463952dba40e81696452ea5d8a"
+
+- name: unarchive apache-drill
+  become: yes
+  become_user: root
+  command: /usr/bin/tar zxvf /opt/apache-drill-1.10.0.tar.gz -C /opt
+
+- name: chwon apache-drill
+  file:
+    owner: root
+    group: root
+    path: /opt/apache-drill-1.10.0
+    state: directory
+    recurse: yes
+
+- name: remove apache-drill
+  file:
+    path: /opt/apache-drill-1.10.0.tar.gz
+    state: absent
+
+- name: set apache-drill path
+  become: no
+  lineinfile:
+    destfile: /home/centos/.bash_profile
+    line: "{{ item }}" 
+    state: present
+  with_items:
+      - 'export PATH=/opt/apache-drill-1.10.0/bin:${PATH}'

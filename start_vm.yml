@@ -1,0 +1,7 @@
+---
+- name: start virtual machine for resource group
+  hosts: azure
+  connection: local
+  gather_facts: no
+  roles:
+    - start_virtual_machine

@@ -3,3 +3,11 @@
     name: "{{ item }}"
     state: latest
   with_items: "{{ ambari_packages }}"
+
+- name: agent script copy
+  copy:
+    src: files/ambari_agent_restart.sh
+    dest: /usr/local/bin/ambari_agent_restart.sh
+    owner: root
+    group: root
+    mode: "u=rwx,g=rx,o=r"

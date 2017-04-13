@@ -4,6 +4,7 @@
   get_url:
     url: http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip
     dest: /opt
+    sha256sum: "bb37146a67d067069754c775b9c9f03b52da953261981738de963057023cda3a"
 
 - name: unarchive maven
   command: /usr/bin/unzip /opt/apache-maven-3.3.9-bin.zip -d /opt

@@ -4,6 +4,7 @@
   get_url:
     url: https://dl.bintray.com/sbt/native-packages/sbt/0.13.13/sbt-0.13.13.zip
     dest: /opt
+    sha256sum: "701ac8873b9f91c591c86cbd74b2b7057f9cfeeee374cc9bc07303243b6fb5e7"
 
 - name: unarchive jce
   command: /usr/bin/unzip /opt/sbt-0.13.13.zip -d /opt
