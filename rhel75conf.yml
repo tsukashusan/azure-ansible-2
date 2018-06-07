@@ -1,0 +1,17 @@
+#ansible_python_interpreter: /usr/bin/python3
+host_group: rhel75
+nic_name: nic-rhel75
+public_ip_name: public-ip-rhel75
+vm_name: vm-rhel75
+security_group_name: segrhel
+storage_account_name: strrhel
+vm_network_name: vm-net-rhel
+resource_group: rhelresource
+subnet_name: rhel-subnet
+location: japaneast
+vm_size: Standard_F2
+storage_accout_type: Standard_LRS
+storage_kind: Storage 
+domain_name_label: vmrhel75
+network_addr_prefix: 10.255.0.0/16
+network_subnet_addr_prefix: 10.255.0.0/24

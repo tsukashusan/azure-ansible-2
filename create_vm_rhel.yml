@@ -1,0 +1,20 @@
+---
+- name: create virtual machine
+  hosts: azure
+  connection: local
+  gather_facts: no
+  roles:
+    - resource_group
+    - network
+    - network_assing
+    - rhel
+
+- name: configure virtual machine
+  hosts: "{{ host_group }}"
+  gather_facts: no
+  become: yes
+  roles:
+    - locale_time
+    - selinux_off
+    - yum_update
+    - reboot

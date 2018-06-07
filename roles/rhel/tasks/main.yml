@@ -1,9 +1,9 @@
-- name: Create VM with CentOS
+- name: Create VM with RHEL
   azure_rm_virtualmachine:
     resource_group: "{{ resource_group }}"
     name: "{{ vm_name }}{{ no }}"
     virtual_network_name: "{{ vm_network_name }}"
-    subnet_name: subnet001
+    subnet_name: "{{ subnet_name }}"
     network_interface_names: "{{ nic_name }}{{ no }}"
     managed_disk_type: Standard_LRS
     os_disk_caching: ReadWrite

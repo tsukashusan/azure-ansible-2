@@ -1,4 +1,4 @@
-# Disable SELinux
+# Reboot
 
 - name: restart machine
   command: "/usr/bin/systemd-run --on-active=1 /usr/bin/systemctl reboot"
